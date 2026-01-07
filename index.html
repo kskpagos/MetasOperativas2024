@@ -6,11 +6,11 @@
     <title>Kushki - Reporte de Metas Integral</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
-    
+
     <style>
-        /* TOKENS DE DISEÑO KUSHKI ORIGINALES */
+        /* TOKENS DE DISEÑO KUSHKI OPTIMIZADOS */
         :root {
             --blue-900: #0e1e2e;
             --blue-500: #023365;
@@ -19,129 +19,342 @@
             --green-500: #00e6b2;
             --green-700: #0dc298;
             --gray-100: #fbfcfe;
-            --gray-200: #f7fafc;
+            --gray-200: #f2f5f9;
             --gray-400: #e2e8f0;
-            --gray-800: #46525c;
+            --gray-800: #2d3748;
             --white: #ffffff;
             --font-sans: 'IBM Plex Sans', sans-serif;
             --font-mono: 'IBM Plex Mono', monospace;
-            --radius-lg: 16px;
-            --radius-md: 12px;
-            --shadow-ch: 0 8px 17px rgba(106, 167, 197, 0.15);
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --kushki-gradient: linear-gradient(135deg, var(--blue-500) 0%, var(--blue-900) 100%);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
 
         body {
-            background-color: var(--gray-400);
+            background-color: #cbd5e0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 40px;
+            gap: 60px;
             padding: 40px 0;
             margin: 0;
+            font-family: var(--font-sans);
+            color: var(--gray-800);
         }
 
+        /* Estructura del Slide */
         .slide-container {
             width: 1280px;
             height: 720px;
             background-color: var(--white);
             border-radius: var(--radius-lg);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-xl);
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            font-family: var(--font-sans);
-            padding: 50px 60px;
+            padding: 60px 80px;
             flex-shrink: 0;
+            scroll-snap-align: center;
+            border: 1px solid rgba(255,255,255,0.5);
         }
 
-        /* Decoración Visual Original */
+        /* Decoraciones de Fondo */
         .slide-container::before {
             content: '';
             position: absolute;
-            top: -100px;
-            right: -100px;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(0, 230, 178, 0.07) 0%, transparent 70%);
-            z-index: 0;
+            top: 0;
+            right: 0;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle at top right, rgba(0, 230, 178, 0.05), transparent 70%);
+            pointer-events: none;
         }
 
         .slide-container::after {
             content: '';
             position: absolute;
-            bottom: 25px;
-            left: 60px;
-            width: 140px;
-            height: 6px;
-            background-color: var(--green-500);
-            border-radius: 3px;
+            bottom: 40px;
+            left: 80px;
+            width: 80px;
+            height: 4px;
+            background: var(--green-500);
+            border-radius: 2px;
         }
 
-        .slide-container > * { position: relative; z-index: 1; }
+        /* Cabecera Común */
+        .logo-container {
+            position: absolute;
+            top: 50px;
+            right: 80px;
+            z-index: 10;
+        }
+        .logo-container img { width: 140px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05)); }
 
         .slide-title {
-            font-size: 42px;
+            font-size: 48px;
             color: var(--blue-500);
-            font-weight: 600;
-            margin-bottom: 25px;
-            border-left: 10px solid var(--green-500);
-            padding-left: 20px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
-        .logo-container { position: absolute; top: 40px; right: 60px; }
-        .logo-container img { width: 150px; }
+        .slide-title span.line {
+            display: inline-block;
+            width: 12px;
+            height: 48px;
+            background: var(--green-500);
+            border-radius: 4px;
+        }
 
-        .content-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; }
+        .content-area {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
 
-        /* Portadas y Layouts */
-        .title-layout { text-align: center; justify-content: center; align-items: center; height: 100%; display: flex; flex-direction: column; }
-        
-        .section-title-layout { 
-            height: 100%; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            background-color: var(--blue-500); 
-            color: var(--white); 
-            margin: -50px -60px; 
+        /* Layout Portada */
+        .title-layout {
+            text-align: left;
+            justify-content: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Layout Sección (Azul) */
+        .section-title-layout {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: var(--kushki-gradient);
+            color: var(--white);
+            margin: -60px -80px;
             padding: 80px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Listas y Tablas */
-        .objectives-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-        .objective-item { display: grid; grid-template-columns: 90px 1fr; align-items: center; background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-ch); }
-        .percentage-badge { background-color: var(--blue-500); color: var(--green-500); font-family: var(--font-mono); font-size: 28px; font-weight: 700; height: 100%; display: flex; align-items: center; justify-content: center; padding: 15px; }
-        .objective-text { padding: 15px 25px; font-size: 17px; color: var(--gray-800); }
+        .section-title-layout::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
 
-        .table-wrapper table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: var(--radius-md); overflow: hidden; font-size: 14px; }
-        .table-wrapper th { background: var(--blue-500); color: var(--white); padding: 15px; text-align: left; }
-        .table-wrapper td { padding: 10px 15px; border-bottom: 1px solid var(--gray-400); color: var(--gray-800); }
+        /* Objetivos Grid */
+        .objectives-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        .objective-item {
+            display: flex;
+            background: var(--gray-100);
+            border: 1px solid var(--gray-400);
+            border-radius: var(--radius-md);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--shadow-sm);
+        }
+        .objective-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: var(--blue-250);
+        }
+        .percentage-badge {
+            background-color: var(--blue-500);
+            color: var(--green-500);
+            font-family: var(--font-mono);
+            font-size: 32px;
+            font-weight: 700;
+            min-width: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md) 0 0 var(--radius-md);
+        }
+        .objective-text { padding: 25px; font-size: 18px; line-height: 1.4; color: var(--blue-900); font-weight: 500; }
 
-        .link-pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; background: var(--gray-200); color: var(--blue-500); text-decoration: none; border-radius: 20px; font-weight: 600; font-size: 11px; transition: all 0.2s; }
-        .link-pill:hover { background: var(--blue-250); color: var(--white); }
-        
-        .figma-btn { display: inline-flex; align-items: center; gap: 10px; margin-top: 20px; padding: 12px 20px; background-color: var(--green-500); color: var(--blue-500); text-decoration: none; border-radius: var(--radius-md); font-weight: 700; font-size: 15px; transition: all 0.3s; box-shadow: 0 4px 10px rgba(0, 230, 178, 0.2); }
+        /* Tablas */
+        .table-wrapper {
+            background: var(--gray-100);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--gray-400);
+            box-shadow: var(--shadow-sm);
+        }
+        .table-wrapper table { width: 100%; border-collapse: collapse; }
+        .table-wrapper th {
+            background: var(--blue-500);
+            color: var(--white);
+            padding: 18px 20px;
+            text-align: left;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .table-wrapper td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--gray-400);
+            color: var(--gray-800);
+            font-size: 14px;
+        }
+        .table-wrapper tr:last-child td { border-bottom: none; }
+        .table-wrapper tr:hover { background-color: var(--white); }
 
-        /* Meta 3: IA & GEMS */
-        .meta-section { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 25px; position: relative; margin-bottom: 20px; }
-        .meta-section.dark { background: var(--blue-900); border: none; color: var(--white); padding: 30px; }
-        .compliance-badge { position: absolute; top: -15px; right: 20px; background: var(--green-500); color: var(--blue-500); padding: 5px 18px; border-radius: 20px; font-weight: 700; font-size: 14px; font-family: var(--font-mono); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .gems-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 15px; }
-        .gem-item { display: flex; gap: 15px; background: var(--white); padding: 15px; border-radius: 10px; border-left: 5px solid var(--blue-250); }
-        .gem-item i { font-size: 28px; color: var(--blue-500); }
-        .gem-content h4 { font-size: 15px; color: var(--blue-500); margin-bottom: 4px; font-weight: 600; }
-        .gem-content p { font-size: 12px; line-height: 1.4; color: var(--gray-800); }
+        /* Botones y Pills */
+        .link-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: var(--white);
+            color: var(--blue-400);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 12px;
+            border: 1px solid var(--gray-400);
+            transition: all 0.2s ease;
+        }
+        .link-pill:hover {
+            background: var(--blue-500);
+            color: var(--white);
+            border-color: var(--blue-500);
+            transform: scale(1.05);
+        }
 
-        /* Estadísticas Actividades Meta 4 */
-        .activity-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-        .stat-card { background: var(--gray-100); padding: 30px; border-radius: var(--radius-md); text-align: center; border-bottom: 5px solid var(--blue-500); }
-        .big-number { font-size: 60px; font-weight: 700; color: var(--blue-500); font-family: var(--font-mono); line-height: 1; margin-bottom: 10px; }
-        .image-placeholder { background: var(--gray-200); border: 2px dashed var(--gray-400); border-radius: var(--radius-md); height: 350px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--gray-800); font-style: italic; }
+        .figma-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 28px;
+            background-color: var(--green-500);
+            color: var(--blue-500);
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 15px -3px rgba(0, 230, 178, 0.3);
+        }
+        .figma-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 230, 178, 0.4);
+            filter: brightness(1.05);
+        }
+
+        /* Secciones de IA */
+        .meta-section {
+            background: var(--gray-100);
+            border: 1px solid var(--gray-400);
+            border-radius: var(--radius-md);
+            padding: 35px;
+            position: relative;
+            margin-bottom: 24px;
+        }
+        .meta-section.dark {
+            background: var(--blue-900);
+            border: none;
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .compliance-badge {
+            position: absolute;
+            top: -14px;
+            right: 30px;
+            background: var(--green-500);
+            color: var(--blue-500);
+            padding: 6px 20px;
+            border-radius: 40px;
+            font-weight: 800;
+            font-size: 16px;
+            font-family: var(--font-mono);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .gems-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 25px;
+        }
+        .gem-item {
+            display: flex;
+            gap: 18px;
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--gray-400);
+            transition: border-color 0.3s;
+        }
+        .gem-item:hover { border-color: var(--green-500); }
+        .gem-item i { font-size: 32px; color: var(--blue-500); }
+        .gem-content h4 { font-size: 16px; color: var(--blue-900); margin-bottom: 6px; font-weight: 700; }
+        .gem-content p { font-size: 13px; line-height: 1.5; color: var(--gray-800); }
+
+        /* Estadísticas y Media */
+        .activity-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
+        .stat-card {
+            background: var(--gray-100);
+            padding: 40px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            border: 1px solid var(--gray-400);
+            border-top: 6px solid var(--blue-500);
+        }
+        .big-number {
+            font-size: 72px;
+            font-weight: 800;
+            color: var(--blue-500);
+            font-family: var(--font-mono);
+            line-height: 1;
+            margin: 15px 0;
+            letter-spacing: -2px;
+        }
+        .image-placeholder {
+            background: var(--gray-200);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-400);
+            height: 100%;
+        }
+        .image-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .slide-container > * { animation: fadeIn 0.8s ease-out forwards; }
+
     </style>
 </head>
 <body>
@@ -150,15 +363,18 @@
 <div class="slide-container">
     <div class="logo-container"><img src="https://www.kushkipagos.com/nav/images/k-logo.svg" alt="Kushki"></div>
     <div class="title-layout">
-        <h1 style="font-size: 80px; margin-bottom: 10px; color: var(--blue-500);">Reporte de Metas</h1>
-        <p style="font-size: 24px; color: var(--blue-400); letter-spacing: 2px;">CUMPLIMIENTO ESTRATÉGICO 2024 - 2025</p>
+        <div style="margin-bottom: 20px;">
+            <span style="background: var(--green-500); color: var(--blue-500); padding: 8px 16px; border-radius: 4px; font-weight: 800; font-family: var(--font-mono); font-size: 14px;">Q3-Q4 2025</span>
+        </div>
+        <h1 style="font-size: 90px; line-height: 0.9; margin-bottom: 20px; color: var(--blue-500); font-weight: 800;">Reporte de<br><span style="color: var(--blue-250);">Metas</span></h1>
+        <p style="font-size: 22px; color: var(--gray-800); letter-spacing: 4px; font-weight: 500; text-transform: uppercase;">Cumplimiento Estratégico Integral</p>
     </div>
 </div>
 
 <!-- SLIDE 2: RESUMEN DE OBJETIVOS -->
 <div class="slide-container">
     <div class="logo-container"><img src="https://www.kushkipagos.com/nav/images/k-logo.svg" alt="Kushki"></div>
-    <h2 class="slide-title">Objetivos Estratégicos</h2>
+    <h2 class="slide-title"><span class="line"></span>Objetivos Estratégicos</h2>
     <div class="content-area">
         <div class="objectives-list">
             <div class="objective-item">
@@ -167,15 +383,15 @@
             </div>
             <div class="objective-item">
                 <div class="percentage-badge">30%</div>
-                <div class="objective-text">Entregar las funcionalidades de producto necesarias para ofrecer una oferta competitiva de CP y CNP en LATAM y ganar market share en México y Chile.</div>
+                <div class="objective-text">Funcionalidades de producto necesarias para oferta competitiva CP/CNP en LATAM, México y Chile.</div>
             </div>
             <div class="objective-item">
                 <div class="percentage-badge">30%</div>
-                <div class="objective-text">Cada kushkeño deben utilizar activamente IA en sus tareas y responsabilidades diarias.</div>
+                <div class="objective-text">Uso activo de IA en tareas y responsabilidades diarias de cada kushkeño.</div>
             </div>
             <div class="objective-item">
                 <div class="percentage-badge">30%</div>
-                <div class="objective-text">Alinear al 100% la estrategia de Kushki con la priorización del Roadmap de Producto basado en el impacto financiero de cada iniciativa.</div>
+                <div class="objective-text">Alinear estrategia con Roadmap de Producto basado en impacto financiero al 100%.</div>
             </div>
         </div>
     </div>
@@ -184,26 +400,34 @@
 <!-- SLIDE 3: PORTADA SECCIÓN 1 -->
 <div class="slide-container">
     <div class="section-title-layout">
-        <span class="material-symbols-rounded" style="font-size: 70px; color: var(--green-500); margin-bottom: 15px;">description</span>
-        <h2 style="font-size: 50px;">Habilitación LATAM</h2>
-        <p style="font-size: 20px; color: var(--green-500); font-family: var(--font-mono);">PESO ESTRATÉGICO: 10%</p>
+        <div style="background: rgba(255,255,255,0.1); width: 120px; height: 120px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 30px;">
+            <span class="material-symbols-rounded" style="font-size: 60px; color: var(--green-500);">description</span>
+        </div>
+        <h2 style="font-size: 60px; font-weight: 800; margin-bottom: 10px;">Habilitación LATAM</h2>
+        <p style="font-size: 22px; color: var(--green-500); font-family: var(--font-mono); font-weight: 700;">PESO ESTRATÉGICO: 10%</p>
     </div>
 </div>
 
 <!-- SLIDE 4: META 1 DETALLE -->
 <div class="slide-container">
     <div class="logo-container"><img src="https://www.kushkipagos.com/nav/images/k-logo.svg" alt="Kushki"></div>
-    <h2 class="slide-title">Portal de Documentación Técnica</h2>
+    <h2 class="slide-title"><span class="line"></span>Portal de Documentación Técnica</h2>
+
     <div class="content-area">
+        <h3 style="color: var(--gray-800); margin-bottom: 30px; font-weight: 500; font-size: 18px; border-left: 4px solid var(--gray-400); padding-left: 20px;"> Apoyar y participar en el diseño y estructuración del nuevo portal de documentación de alto y bajo nivel de Kushki, cumpliendo con el 100% de las actividades requeridas para el segundo semestre de 2025.</h3>
+
         <div class="activity-grid">
             <div>
-                <h3 style="color: var(--blue-500); margin-bottom: 15px;">Logro: 100% Actividades Cumplidas</h3>
-                <div style="background: var(--gray-200); padding: 20px; border-radius: var(--radius-md); border-left: 4px solid var(--blue-400);">
-                    <p style="font-size: 15px; line-height: 1.6;"><strong>Rol Clave:</strong> Mi rol se centró en apoyar al equipo de diseño mediante el uso de Figma Make, aplicando principios de Diseño (Accesibilidad) y optimizando la experiencia de usuario (UX). Supervisé que la identidad visual respetará la línea gráfica de la marca, facilitando la navegación de documentos técnicos complejos.</p>
+                <div style="background: var(--gray-100); padding: 30px; border-radius: var(--radius-md); border-left: 6px solid var(--blue-400); margin-bottom: 30px; box-shadow: var(--shadow-sm);">
+                    <p style="font-size: 16px; line-height: 1.7; color: var(--blue-900);"><strong>Rol Clave:</strong> Mi rol se centró en apoyar al equipo de diseño mediante el uso de Figma Make, aplicando principios de Diseño (Accesibilidad) y optimizando la experiencia de usuario (UX). Supervisé que la identidad visual respetará la línea gráfica de la marca, facilitando la navegación de documentos técnicos complejos.</p>
                 </div>
-                <a href="https://www.figma.com/make/lWjTMt7OUmbSec05kFMTgE/Interfaz-de-Documentacio%CC%81n-Te%CC%81cnica-Kushki--1---Copy-?p=f&t=OOkiw2if4Rm2wUtD-0&fullscreen=1" target="_blank" class="figma-btn">Ver Prototipo Portal</a>
+                <a href="https://www.figma.com/make/lWjTMt7OUmbSec05kFMTgE/Interfaz-de-Documentacio%CC%81n-Te%CC%81cnica-Kushki--1---Copy-?p=f&t=OOkiw2if4Rm2wUtD-0&fullscreen=1" target="_blank" class="figma-btn">
+                    <span class="material-symbols-rounded">auto_awesome</span> Ver Prototipo Portal
+                </a>
             </div>
-            <div class="image-placeholder">[Imagen del equipo trabajando en el Portal de Documentación]</div>
+            <div class="image-placeholder" style="height: 380px;">
+                <img src="img/img.png" alt="Portal Documentación">
+            </div>
         </div>
     </div>
 </div>
@@ -211,31 +435,46 @@
 <!-- SLIDE 5: PORTADA SECCIÓN 2 -->
 <div class="slide-container">
     <div class="section-title-layout">
-        <span class="material-symbols-rounded" style="font-size: 70px; color: var(--green-500); margin-bottom: 15px;">shopping_cart</span>
-        <h2 style="font-size: 50px;">Oferta Competitiva CP/CNP</h2>
-        <p style="font-size: 20px; color: var(--green-500); font-family: var(--font-mono);">PESO ESTRATÉGICO: 30%</p>
+        <div style="background: rgba(255,255,255,0.1); width: 120px; height: 120px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 30px;">
+            <span class="material-symbols-rounded" style="font-size: 60px; color: var(--green-500);">shopping_cart</span>
+        </div>
+        <h2 style="font-size: 60px; font-weight: 800; margin-bottom: 10px;">Oferta Competitiva CP/CNP</h2>
+        <p style="font-size: 22px; color: var(--green-500); font-family: var(--font-mono); font-weight: 700;">PESO ESTRATÉGICO: 30%</p>
     </div>
 </div>
 
 <!-- SLIDE 6: META 2 TABLA -->
 <div class="slide-container">
     <div class="logo-container"><img src="https://www.kushkipagos.com/nav/images/k-logo.svg" alt="Kushki"></div>
-    <h2 class="slide-title">Funcionalidades de producto</h2>
+    <h2 class="slide-title"><span class="line"></span>Funcionalidades de Producto</h2>
+    <p style="margin-bottom: 25px; color: var(--gray-800); font-size: 16px;">Se realizaron diseños tanto en Figma y Figma Make que fueron solicitados relacionados de la siguiente forma.</p>
+
     <div class="content-area">
         <div class="table-wrapper">
             <table>
                 <thead>
-                    <tr><th>Requerimiento</th><th>Iniciativa</th><th>Región</th><th>Enlace Prototipo</th></tr>
+                <tr><th>Requerimiento</th><th>Iniciativa</th><th>Región</th><th>Enlace Prototipo</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>Apple Pay VISA y MC</td><td>INI-3784</td><td>LATAM</td><td><a href="https://www.figma.com/proto/6aINE8DBLrgX0H2EcIKHER/Update-Config---Integrations---Apple-Pay?node-id=15545-5652" target="_blank" class="link-pill">Ver Prototipo</a></td></tr>
-                    <tr><td>Apple Pay VISA</td><td>INI-3555</td><td>LATAM</td><td><a href="https://www.figma.com/proto/b8t5lvejFlu8PtTjq6TzmM/ApplePay-Bot%C3%B3n" target="_blank" class="link-pill">Ver Botón</a></td></tr>
-                    <tr><td>Cuotas Comercio Chile</td><td>CAR-15140</td><td>Chile</td><td><a href="https://www.figma.com/proto/oWoR8n0zZKNMkRRW2Ri7Ax/Cuotas-comercio-chile" target="_blank" class="link-pill">Ver Config</a></td></tr>
-                    <tr><td>Cuotas Comercio Desplegable</td><td>INI-3805</td><td>LATAM</td><td><a href="https://cobros-diferidos-prototipo-v2.figma.site/" target="_blank" class="link-pill">Ver Prototipo</a></td></tr>
-                    <tr><td>SmartLink Diferido Cuota</td><td>UX Design</td><td>LATAM</td><td><a href="https://smartlink-cc.figma.site/" target="_blank" class="link-pill">Ver Prototipo</a></td></tr>
-                    <tr><td>Proyecto CPE #P1 - DMS</td><td>INI-4059</td><td>LATAM</td><td><a href="https://proyecto-cpe-p1.figma.site/" target="_blank" class="link-pill">Ver Sincronización</a></td></tr>
+                <tr><td>Apple Pay VISA y MC</td><td>INI-3784</td><td>LATAM</td><td><a href="https://www.figma.com/proto/6aINE8DBLrgX0H2EcIKHER/Update-Config---Integrations---Apple-Pay?node-id=15545-5652" target="_blank" class="link-pill">Explorar <i class="material-symbols-rounded" style="font-size: 14px">open_in_new</i></a></td></tr>
+                <tr><td>Apple Pay VISA</td><td>INI-3555</td><td>LATAM</td><td><a href="https://www.figma.com/proto/b8t5lvejFlu8PtTjq6TzmM/ApplePay-Bot%C3%B3n" target="_blank" class="link-pill">Explorar <i class="material-symbols-rounded" style="font-size: 14px">open_in_new</i></a></td></tr>
+                <tr><td>Cuotas Comercio Chile</td><td>CAR-15140</td><td>Chile</td><td><a href="https://www.figma.com/proto/oWoR8n0zZKNMkRRW2Ri7Ax/Cuotas-comercio-chile" target="_blank" class="link-pill">Explorar <i class="material-symbols-rounded" style="font-size: 14px">open_in_new</i></a></td></tr>
+                <tr><td>Cuotas Comercio Desplegable</td><td>INI-3805</td><td>LATAM</td><td><a href="https://cobros-diferidos-prototipo-v2.figma.site/" target="_blank" class="link-pill">Explorar <i class="material-symbols-rounded" style="font-size: 14px">open_in_new</i></a></td></tr>
+                <tr><td>SmartLink Diferido Cuota</td><td>UX Design</td><td>LATAM</td><td><a href="https://smartlink-cc.figma.site/" target="_blank" class="link-pill">Explorar <i class="material-symbols-rounded" style="font-size: 14px">open_in_new</i></a></td></tr>
+                <tr><td>Proyecto CPE #P1 - DMS</td><td>INI-4059</td><td>LATAM</td><td><a href="https://proyecto-cpe-p1.figma.site/" target="_blank" class="link-pill">Explorar <i class="material-symbols-rounded" style="font-size: 14px">open_in_new</i></a></td></tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 6-B: VISUALES PRODUCTO -->
+<div class="slide-container">
+    <div class="logo-container"><img src="https://www.kushkipagos.com/nav/images/k-logo.svg" alt="Kushki"></div>
+    <h2 class="slide-title"><span class="line"></span>Evidencia de Diseño</h2>
+    <div class="content-area">
+        <div class="image-placeholder" style="background: var(--gray-100); padding: 10px;">
+            <img src="img/image17.png" alt="Diseños de Producto" style="object-fit: contain;">
         </div>
     </div>
 </div>
@@ -243,20 +482,22 @@
 <!-- SLIDE 7: PORTADA SECCIÓN 3 -->
 <div class="slide-container">
     <div class="section-title-layout">
-        <span class="material-symbols-rounded" style="font-size: 70px; color: var(--green-500); margin-bottom: 15px;">bolt</span>
-        <h2 style="font-size: 50px;">Uso Activo de IA</h2>
-        <p style="font-size: 20px; color: var(--green-500); font-family: var(--font-mono);">PESO ESTRATÉGICO: 30%</p>
+        <div style="background: rgba(255,255,255,0.1); width: 120px; height: 120px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 30px;">
+            <span class="material-symbols-rounded" style="font-size: 60px; color: var(--green-500);">bolt</span>
+        </div>
+        <h2 style="font-size: 60px; font-weight: 800; margin-bottom: 10px;">Uso Activo de IA</h2>
+        <p style="font-size: 22px; color: var(--green-500); font-family: var(--font-mono); font-weight: 700;">PESO ESTRATÉGICO: 30%</p>
     </div>
 </div>
 
 <!-- SLIDE 8: META 3 DETALLE -->
 <div class="slide-container">
     <div class="logo-container"><img src="https://www.kushkipagos.com/nav/images/k-logo.svg" alt="Kushki"></div>
-    <h2 class="slide-title">IA & Tokenización</h2>
+    <h2 class="slide-title"><span class="line"></span>IA & Tokenización</h2>
     <div class="content-area">
         <div class="meta-section">
-            <div class="compliance-badge">30% Cumplimiento</div>
-            <p style="font-size: 16px; margin-bottom: 12px; color: var(--blue-500); font-weight: 500;">
+            <div class="compliance-badge">30% KPI</div>
+            <p style="font-size: 18px; margin-bottom: 20px; color: var(--blue-500); font-weight: 600;">
                 Se utilizó frecuentemente Gemini como herramienta para el proceso de tokenización; específicamente se crearon 4 GEMS:
             </p>
             <div class="gems-grid">
@@ -291,9 +532,9 @@
             </div>
         </div>
         <div class="meta-section dark">
-            <div class="compliance-badge">70% Cumplimiento</div>
-            <h4 style="color: var(--green-500); margin-bottom: 10px; font-size: 18px;">Logros en Figma Make</h4>
-            <p style="font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.95);">
+            <div class="compliance-badge">70% ACHIEVED</div>
+            <h4 style="color: var(--green-500); margin-bottom: 10px; font-size: 20px; font-weight: 700;">Logros en Figma Make</h4>
+            <p style="font-size: 15px; line-height: 1.6; color: rgba(255,255,255,0.9); max-width: 900px;">
                 Se realizaron 3 prototipos para <strong>Cuotas comercio, SmartLink CC y Proyecto CPE #P1</strong>. Entregados e iterados de forma continua hasta el prototipo final, además del apoyo para el portal de documentación técnica.
             </p>
         </div>
@@ -303,41 +544,49 @@
 <!-- SLIDE 9: PORTADA SECCIÓN 4 -->
 <div class="slide-container">
     <div class="section-title-layout">
-        <span class="material-symbols-rounded" style="font-size: 70px; color: var(--green-500); margin-bottom: 15px;">account_tree</span>
-        <h2 style="font-size: 38px; line-height: 1.2;">30% Alinear al 100% la estrategia de Kushki con la priorización del Roadmap de Producto basado en el impacto financiero de cada iniciativa</h2>
-        <p style="font-size: 20px; color: var(--green-500); font-family: var(--font-mono); margin-top: 20px;">PESO ESTRATÉGICO: 30%</p>
+        <div style="background: rgba(255,255,255,0.1); width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 30px;">
+            <span class="material-symbols-rounded" style="font-size: 50px; color: var(--green-500);">account_tree</span>
+        </div>
+        <h2 style="font-size: 42px; font-weight: 800; line-height: 1.2; max-width: 1000px; margin-bottom: 20px;">Alinear al 100% la estrategia de Kushki con la priorización del Roadmap basado en el impacto financiero</h2>
+        <p style="font-size: 22px; color: var(--green-500); font-family: var(--font-mono); font-weight: 700;">PESO ESTRATÉGICO: 30%</p>
     </div>
 </div>
 
 <!-- SLIDE 10: META 4 - ACTIVIDAD 1 -->
 <div class="slide-container">
     <div class="logo-container"><img src="https://www.kushkipagos.com/nav/images/k-logo.svg" alt="Kushki"></div>
-    <h2 class="slide-title">Estabilidad del Aplicativo</h2>
+    <h2 class="slide-title"><span class="line"></span>Estabilidad del Aplicativo Roadmap</h2>
     <div class="content-area">
         <div class="activity-grid">
             <div class="stat-card">
-                <p style="margin-bottom: 10px; font-weight: 600;">Tasa de Éxito en Despliegues</p>
+                <p style="margin-bottom: 10px; font-weight: 700; color: var(--gray-800); text-transform: uppercase; font-size: 14px; letter-spacing: 1px;">Tasa de Éxito en Despliegues</p>
                 <div class="big-number">92%</div>
-                <p style="margin-top: 10px;">65 despliegues exitosos de 71 totales</p>
+                <div style="background: var(--white); padding: 10px; border-radius: 8px; display: inline-block;">
+                    <p style="font-weight: 600; color: var(--blue-500);">65 despliegues exitosos de 71 totales</p>
+                </div>
             </div>
-            <div class="image-placeholder">[Imagen del Dashboard de Estabilidad del Aplicativo]</div>
+            <div class="image-placeholder" style="height: 350px;">
+                <img src="img/img_1.png" alt="Métricas Roadmap">
+            </div>
         </div>
-        <p style="margin-top: 30px; font-size: 16px;">Garantizamos la estabilidad del aplicativo del Roadmap mediante un monitoreo continuo de cada despliegue para asegurar la alineación financiera de las iniciativas.</p>
+        <p style="margin-top: 40px; font-size: 17px; color: var(--blue-900); background: var(--gray-200); padding: 20px; border-radius: 12px; border-left: 4px solid var(--green-500);">Garantizamos la estabilidad del aplicativo del Roadmap mediante un monitoreo continuo de cada despliegue para asegurar la alineación financiera de las iniciativas.</p>
     </div>
 </div>
 
 <!-- SLIDE 11: META 4 - ACTIVIDAD 2 -->
 <div class="slide-container">
     <div class="logo-container"><img src="https://www.kushkipagos.com/nav/images/k-logo.svg" alt="Kushki"></div>
-    <h2 class="slide-title">Tokenización del Sistema de Diseño</h2>
+    <h2 class="slide-title"><span class="line"></span>Tokenización del Sistema de Diseño</h2>
     <div class="content-area">
         <div class="activity-grid">
-            <div class="image-placeholder">[Imagen del Repositorio Bitbucket o Estructura de Tokens]</div>
-            <div>
-                <h3 style="color: var(--blue-500); margin-bottom: 20px;">Ejecución al 100%</h3>
-                <p style="margin-bottom: 20px;">Proyecto de tokenización completado integrando Primitivos, Semánticos y Átomos en el repositorio centralizado de diseño.</p>
+            <div class="image-placeholder" style="height: 380px;">
+                <img src="img/img_2.png" alt="Tokens UI">
+            </div>
+            <div style="padding-left: 20px;">
+                <h3 style="color: var(--blue-500); margin-bottom: 25px; font-size: 32px; font-weight: 800;">Ejecución al 100%</h3>
+                <p style="margin-bottom: 35px; font-size: 18px; line-height: 1.6;">Proyecto de tokenización completado integrando <strong>Primitivos, Semánticos y Átomos</strong> en el repositorio centralizado de diseño.</p>
                 <a href="https://bitbucket.org/kushky-desing/kushki-tokens/src/main/" target="_blank" class="figma-btn">
-                    <span class="material-symbols-rounded">code</span> Ver Repositorio Bitbucket
+                    <span class="material-symbols-rounded">code_blocks</span> Ver Repositorio Bitbucket
                 </a>
             </div>
         </div>
@@ -347,32 +596,45 @@
 <!-- SLIDE 12: META 4 - ACTIVIDAD 3 -->
 <div class="slide-container">
     <div class="logo-container"><img src="https://www.kushkipagos.com/nav/images/k-logo.svg" alt="Kushki"></div>
-    <h2 class="slide-title">Mejoras App & Métricas JIRA</h2>
+    <h2 class="slide-title"><span class="line"></span>Mejoras App Roadmap</h2>
     <div class="content-area">
-        <div class="activity-grid">
-            <div class="stat-card" style="border-bottom-color: var(--green-500);">
-                <p style="margin-bottom: 10px; font-weight: 600;">Efectividad JIRA (UXUI)</p>
-                <div class="big-number">96%</div>
-                <p style="margin-top: 10px;">86 incidencias finalizadas de 90 totales</p>
+        <div class="activity-grid" style="grid-template-columns: 1fr 1fr;">
+            <div class="stat-card" style="border-top-color: var(--green-500);">
+                <p style="margin-bottom: 10px; font-weight: 700; font-size: 14px; text-transform: uppercase;">Efectividad JIRA (UXUI)</p>
+                <div class="big-number" style="color: var(--green-700);">98.88%</div>
+                <p style="font-weight: 600; margin-bottom: 5px;">89 incidencias finalizadas de 90 totales</p>
+                <p style="font-size: 13px; color: var(--blue-400);">La faltante está en Análisis</p>
             </div>
             <div>
-                <h3 style="color: var(--blue-500); margin-bottom: 15px;">Optimización del Roadmap</h3>
-                <p style="margin-bottom: 20px;">Mejoras implementadas en el aplicativo del Roadmap (2S 2024) para facilitar la priorización basada en impacto financiero.</p>
-                <a href="https://studio--kushki-roadmap-vision.us-central1.hosted.app/" target="_blank" class="figma-btn">
-                    <span class="material-symbols-rounded">open_in_new</span> Ver Aplicativo Roadmap
-                </a>
+                <h3 style="color: var(--blue-500); margin-bottom: 20px; font-size: 24px;">Optimización del Roadmap</h3>
+                <p style="margin-bottom: 25px; font-size: 15px; line-height: 1.5;">Mejoras implementadas en el aplicativo del Roadmap (Ago-Dic 2025) para facilitar la priorización basada en impacto financiero. Resoluciones directas vía Slack también atendidas.</p>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <a href="https://studio--kushki-roadmap-vision.us-central1.hosted.app/" target="_blank" class="figma-btn" style="padding: 12px 20px; font-size: 14px;">
+                        <span class="material-symbols-rounded">rocket_launch</span> Ver Aplicativo Roadmap
+                    </a>
+                    <a href="https://kushki.atlassian.net/jira/software/c/projects/UI/list?filter=assignee%20%3D%20%22712020%3A40c882b4-317c-4997-bff2-cd72d68f21c1%22" target="_blank" style="color: var(--blue-400); font-weight: 700; text-decoration: none; font-size: 13px; display: flex; align-items: center; gap: 6px; padding-left: 10px;">
+                        Ver informe completo en Jira <span class="material-symbols-rounded" style="font-size: 16px;">arrow_forward</span>
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="image-placeholder" style="height: 180px; margin-top: 30px;">[Imagen de apoyo de las métricas de JIRA o Interfaz de la App]</div>
+        <div class="image-placeholder" style="height: 180px; margin-top: 30px; background: none; border: none;">
+            <img src="/img/img_3.png" alt="Reporte Jira" style="object-fit: contain;">
+        </div>
     </div>
 </div>
 
 <!-- SLIDE 13: CIERRE -->
-<div class="slide-container" style="background-color: var(--blue-500);">
-    <div class="title-layout" style="color: var(--white);">
-        <h2 style="color: var(--green-500); font-size: 60px; margin-bottom: 15px;">¡Objetivos Logrados!</h2>
-        <p style="font-size: 20px; opacity: 0.9;">Reporte Anual de UXUI Team - Kushki</p>
-        <img src="https://firebasestorage.googleapis.com/v0/b/studio-3394656532-f7e40.firebasestorage.app/o/podcast%2Fimages%2Flogo.svg?alt=media&token=d4305409-1294-416b-96f2-3cfc41b3225d" style="width: 200px; margin-top: 40px;">
+<div class="slide-container" style="background: var(--kushki-gradient);">
+    <div class="title-layout" style="color: var(--white); align-items: center; text-align: center;">
+        <div style="margin-bottom: 40px; transform: scale(1.5);">
+            <img src="https://firebasestorage.googleapis.com/v0/b/studio-3394656532-f7e40.firebasestorage.app/o/podcast%2Fimages%2Flogo.svg?alt=media&token=d4305409-1294-416b-96f2-3cfc41b3225d" alt="Kushki Logo">
+        </div>
+        <h2 style="color: var(--green-500); font-size: 72px; font-weight: 800; margin-bottom: 10px; text-shadow: 0 4px 10px rgba(0,0,0,0.2);">¡Objetivos Logrados!</h2>
+        <p style="font-size: 24px; opacity: 0.8; letter-spacing: 2px; font-weight: 300;">Reporte Anual de UXUI Team • Kushki</p>
+
+        <div style="margin-top: 80px; width: 300px; height: 1px; background: rgba(255,255,255,0.2);"></div>
+        <p style="margin-top: 20px; font-family: var(--font-mono); font-size: 12px; color: var(--green-500);">ESTRATEGIA • INNOVACIÓN • RESULTADOS</p>
     </div>
 </div>
 
